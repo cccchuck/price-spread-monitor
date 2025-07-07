@@ -1,10 +1,14 @@
 from prometheus_client import Gauge, start_http_server, REGISTRY
 import logging
+import os
 from typing import Dict, Any
 
 class PrometheusMetrics:
-    def __init__(self, port: int = 8000):
-        self.port = port
+    def __init__(self, port: int = None):
+        # 从环境变量获取端口，默认8000
+        self.port = port or int(os.getenv('PROMETHEUS_PORT', '8000'))
+        # 绑定地址，Zeabur 内部网络通信
+        self.host = os.getenv('PROMETHEUS_HOST', '0.0.0.0')
         self.logger = logging.getLogger(__name__)
         
         # 定义指标
@@ -24,8 +28,8 @@ class PrometheusMetrics:
         self.aster_ask_price = Gauge('aster_ask_price', 'Aster BTC ask price')
         
     def start_server(self):
-        start_http_server(self.port)
-        self.logger.info(f"Prometheus metrics server started on port {self.port}")
+        start_http_server(self.port, addr=self.host)
+        self.logger.info(f"Prometheus metrics server started on {self.host}:{self.port}")
         
     def update_metrics(self, spreads: Dict[str, float]):
         self.okx_buy_aster_sell_spread.set(spreads['okx_buy_aster_sell'])
