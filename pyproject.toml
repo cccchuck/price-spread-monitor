@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "price-spread-monitor"
+version = "0.1.0"
+description = "OKX and Aster BTC price spread monitoring service"
+authors = ["Chuck Gao<chuckgao68686@gmail.com>"]
+  
+[tool.poetry.dependencies]
+python = "^3.11"
+aiohttp = "^3.8.0"
+websockets = "^11.0"
+prometheus-client = "^0.17.0"
+asyncio = "^3.4.3"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0.0"
+pytest-asyncio = "^0.21.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
