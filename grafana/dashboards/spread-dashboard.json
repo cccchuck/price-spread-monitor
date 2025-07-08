@@ -1,215 +1,213 @@
 {
-  "dashboard": {
-    "id": null,
-    "title": "OKX & Aster BTC 价差监控",
-    "tags": ["crypto", "spread", "btc"],
-    "style": "dark",
-    "timezone": "browser",
-    "refresh": "5s",
-    "time": {
-      "from": "now-1h",
-      "to": "now"
-    },
-    "panels": [
-      {
-        "id": 1,
-        "title": "实时价差对比",
-        "type": "timeseries",
-        "gridPos": {
-          "h": 9,
-          "w": 24,
-          "x": 0,
-          "y": 0
+  "id": null,
+  "title": "OKX & Aster BTC 价差监控",
+  "tags": ["crypto", "spread", "btc"],
+  "style": "dark",
+  "timezone": "browser",
+  "refresh": "5s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "实时价差对比",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "expr": "okx_buy_aster_sell_spread",
+          "legendFormat": "OKX买入 Aster卖出",
+          "refId": "A"
         },
-        "targets": [
-          {
-            "expr": "okx_buy_aster_sell_spread",
-            "legendFormat": "OKX买入 Aster卖出",
-            "refId": "A"
+        {
+          "expr": "aster_buy_okx_sell_spread",
+          "legendFormat": "Aster买入 OKX卖出",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
           },
-          {
-            "expr": "aster_buy_okx_sell_spread",
-            "legendFormat": "Aster买入 OKX卖出",
-            "refId": "B"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "vis": false
             },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "vis": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
             },
-            "unit": "currencyUSD"
-          }
-        }
-      },
-      {
-        "id": 2,
-        "title": "当前价差状态",
-        "type": "stat",
-        "gridPos": {
-          "h": 6,
-          "w": 12,
-          "x": 0,
-          "y": 9
-        },
-        "targets": [
-          {
-            "expr": "okx_buy_aster_sell_spread",
-            "legendFormat": "OKX买 Aster卖",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
-            "thresholds": {
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 0
-                },
-                {
-                  "color": "green",
-                  "value": 10
-                }
-              ]
-            },
-            "unit": "currencyUSD"
-          }
-        }
-      },
-      {
-        "id": 3,
-        "title": "当前价差状态",
-        "type": "stat",
-        "gridPos": {
-          "h": 6,
-          "w": 12,
-          "x": 12,
-          "y": 9
-        },
-        "targets": [
-          {
-            "expr": "aster_buy_okx_sell_spread",
-            "legendFormat": "Aster买 OKX卖",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "thresholds": {
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 0
-                },
-                {
-                  "color": "green",
-                  "value": 10
-                }
-              ]
-            },
-            "unit": "currencyUSD"
-          }
-        }
-      },
-      {
-        "id": 4,
-        "title": "OKX 买卖价格",
-        "type": "timeseries",
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 15
-        },
-        "targets": [
-          {
-            "expr": "okx_bid_price",
-            "legendFormat": "OKX 买入价",
-            "refId": "A"
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
-          {
-            "expr": "okx_ask_price",
-            "legendFormat": "OKX 卖出价",
-            "refId": "B"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "currencyUSD"
-          }
-        }
-      },
-      {
-        "id": 5,
-        "title": "Aster 买卖价格",
-        "type": "timeseries",
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 15
-        },
-        "targets": [
-          {
-            "expr": "aster_bid_price",
-            "legendFormat": "Aster 买入价",
-            "refId": "A"
-          },
-          {
-            "expr": "aster_ask_price",
-            "legendFormat": "Aster 卖出价",
-            "refId": "B"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "currencyUSD"
-          }
+          "unit": "percentunit"
         }
       }
-    ]
-  }
+    },
+    {
+      "id": 2,
+      "title": "当前价差状态 - OKX买 Aster卖",
+      "type": "stat",
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "targets": [
+        {
+          "expr": "okx_buy_aster_sell_spread",
+          "legendFormat": "OKX买 Aster卖",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "percentunit"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "当前价差状态 - Aster买 OKX卖",
+      "type": "stat",
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "targets": [
+        {
+          "expr": "aster_buy_okx_sell_spread",
+          "legendFormat": "Aster买 OKX卖",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "percentunit"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "OKX 买卖价格",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "targets": [
+        {
+          "expr": "okx_bid_price",
+          "legendFormat": "OKX 买入价",
+          "refId": "A"
+        },
+        {
+          "expr": "okx_ask_price",
+          "legendFormat": "OKX 卖出价",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Aster 买卖价格",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "targets": [
+        {
+          "expr": "aster_bid_price",
+          "legendFormat": "Aster 买入价",
+          "refId": "A"
+        },
+        {
+          "expr": "aster_ask_price",
+          "legendFormat": "Aster 卖出价",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD"
+        }
+      }
+    }
+  ]
 }

@@ -15,10 +15,10 @@ class OKXPriceStream:
     async def connect(self):
         try:
             self.ws = await websockets.connect(self.ws_url)
-            # 订阅BTC-USDT盘口数据
+            # 订阅BTC-USDT永续合约盘口数据
             subscribe_msg = {
                 "op": "subscribe",
-                "args": [{"channel": "books", "instId": "BTC-USDT"}]
+                "args": [{"channel": "books", "instId": "BTC-USDT-SWAP"}]
             }
             await self.ws.send(json.dumps(subscribe_msg))
             self.logger.info("OKX WebSocket connected and subscribed")
